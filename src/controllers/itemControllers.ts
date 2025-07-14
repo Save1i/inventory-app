@@ -28,9 +28,16 @@ async function getAllItems(req: Request, res: Response) {
     res.status(200).json(items)
 }
 
+async function getItem(req: Request, res: Response) {
+    const {itemId} = req.body;
+    const item = await db.getItem(itemId)
+    res.status(200).json(item)
+}
+
 export default {
     insertItem,
     updateItem,
     deleteItem,
     getAllItems,
+    getItem,
 }
