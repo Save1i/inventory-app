@@ -2,7 +2,7 @@ import express from 'express'
 const app = express()
 const port = 3000
 
-import route from "./src/routes/router"
+import router from "./src/routes/index.ts"
 
 require("dotenv").config({ debug: true });
 import { neon } from "@neondatabase/serverless"
@@ -19,7 +19,7 @@ app.get('/', async (req, res) => {
   }
 });
 
-app.use("/", route)
+app.use("/", router)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
