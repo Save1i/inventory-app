@@ -1,5 +1,5 @@
 import {Router} from "express"
-import categoryRouter from "./CategoryRouter"
+import categoryRouter from "./categoryRouter"
 import itemRouter from "./itemRouter"
 
 const router = Router()
