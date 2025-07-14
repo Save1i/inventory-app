@@ -8,5 +8,7 @@ router.get("/update", controller.getItem)
 router.post("/update", controller.updateItem)
 router.post("/delete", controller.deleteItem)
 router.get("/", controller.getAllItems)
+router.get("/:categoryId", controller.getCategoryItems)
+
 
 export default router;
