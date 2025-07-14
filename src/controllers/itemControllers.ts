@@ -34,10 +34,17 @@ async function getItem(req: Request, res: Response) {
     res.status(200).json(item)
 }
 
+async function getCategoryItems(req: Request, res: Response) {
+    const category_id = parseInt(req.query.categoryId as string);
+    const items = await db.getCategoryItems(category_id)
+    res.status(200).json(items)
+}
+
 export default {
     insertItem,
     updateItem,
     deleteItem,
     getAllItems,
     getItem,
+    getCategoryItems,
 }
