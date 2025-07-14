@@ -36,6 +36,11 @@ async function getAllItems() {
     return rows
 }
 
+async function getItem(itemId: number) {
+    const item = await sql.query("SELECT * FROM items WHERE item_id=$1", [itemId])
+    return item
+}
+
 export = {
     insertCategoryName,
     updateCategoryName,
@@ -45,6 +50,7 @@ export = {
     updateItem, 
     deleteItem,
     getAllItems,
+    getItem
 }
 
     
