@@ -24,7 +24,7 @@ async function deleteCategory(req: Request, res:Response) {
 async function getAllCategories(req:Request, res: Response) {
     const categories = await db.getAllCategories()
     console.log(categories)
-    res.status(200).json(categories)
+    res.render("categories", {categories})
 }
 
 export = {
