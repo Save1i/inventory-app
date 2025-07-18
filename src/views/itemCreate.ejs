@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add item</title>
+</head>
+<body>
+    <h1>Add item</h1>
+    <form action="/item/new" method="post">
+        <label for="itemName">Name:</label>
+        <input type="text" name="itemName" id="itemName">
+        <label for="item_price">Price:</label>
+        <input type="text" name="item_price" id="item_price">
+        <label for="itemName">Count:</label>
+        <input type="text" name="item_count" id="item_count">
+        <label for="category_id">Count:</label>
+        <select id="category_id" name="category_id">
+            <% categories.forEach(category => { %>
+                    <option value="<%= category.category_id %>"><%= category.name %></option>
+            <%})%>
+        </select>
+        <button type="submit">Add item</button>
+    </form>
+</body>
+</html>
