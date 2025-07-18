@@ -12,7 +12,8 @@ async function updateItem(req: Request, res: Response) {
     const {itemName, itemId, item_count, item_price, category_id} = req.body
 
     await db.updateItem(itemName, itemId, item_count, item_price, category_id)
-    res.status(200).json({itemName, itemId, item_count, item_price, category_id})
+    // res.status(200).json({itemName, itemId, item_count, item_price, category_id})
+    res.redirect(`/item/${itemId}`)
 }
 
 async function deleteItem(req: Request, res: Response) {
@@ -24,21 +25,33 @@ async function deleteItem(req: Request, res: Response) {
 
 async function getAllItems(req: Request, res: Response) {
     const items = await db.getAllItems()
-    console.log(items)
+
     res.status(200).json(items)
 }
 
 async function getItem(req: Request, res: Response) {
-    const {itemId} = req.body;
+    let itemId = 0;
+    if(req.params.itemId) {
+        itemId = parseInt(req.params.itemId);
+    } else {
+        itemId = req.body.itemId
+    }
     const item = await db.getItem(itemId)
-    res.status(200).json(item)
+    res.render('item', {item})
+    // res.json({item})
 }
 
-async function getCategoryItems(req: Request, res: Response) {
-    const category_id = parseInt(req.query.categoryId as string);
-    const items = await db.getCategoryItems(category_id)
-    res.status(200).json(items)
+async function getItemForUpdate(req: Request, res: Response) {
+    let itemId = 0;
+    if(req.params.itemId) {
+        itemId = parseInt(req.params.itemId);
+    } else {
+        itemId = req.body.itemId
+    }
+    const item = await db.getItem(itemId)
+    res.render('itemUpdate', {item})
 }
+
 
 export default {
     insertItem,
@@ -46,5 +59,5 @@ export default {
     deleteItem,
     getAllItems,
     getItem,
-    getCategoryItems,
+    getItemForUpdate,
 }
