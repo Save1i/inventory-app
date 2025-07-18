@@ -1,11 +1,19 @@
 import { Request, Response } from "express";
 import db from "../db/queries"
 
-async function insertItem(req: Request, res: Response) {
-    const {itemName, category_id, item_count, item_price} = req.body
+async function insertItemPost(req: Request, res: Response) {
+    const {itemName, item_count, category_id, item_price} = req.body
+
+    // const category_id = parseInt(req.params.category_id)
 
     await db.insertItem(itemName, category_id, item_count, item_price)
-    res.status(200).json({itemName, category_id, item_count, item_price})
+    // const items = await db.getCategoryItems(category_id)
+    res.redirect(`/category/${category_id}`)
+}
+
+async function insertItemGet(req: Request, res: Response) {
+    const categories = await db.getAllCategories()
+    res.render("itemCreate", {categories})
 }
 
 async function updateItem(req: Request, res: Response) {
@@ -54,7 +62,8 @@ async function getItemForUpdate(req: Request, res: Response) {
 
 
 export default {
-    insertItem,
+    insertItemPost,
+    insertItemGet,
     updateItem,
     deleteItem,
     getAllItems,
