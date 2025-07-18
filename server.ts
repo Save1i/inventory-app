@@ -8,6 +8,8 @@ app.use(express.json());
 app.set('views', path.join(__dirname, 'src/views'))
 app.set('view engine', 'ejs')
 
+app.use(express.urlencoded({ extended: true }));
+
 const port = 3000
 
 require("dotenv").config({ debug: true });
