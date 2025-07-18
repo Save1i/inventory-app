@@ -1,10 +1,14 @@
 import { Request, Response } from "express";
 import db from "../db/queries"
 
-async function createCategoryName(req: Request, res: Response) {
+async function createCategoryNamePost(req: Request, res: Response) {
     const {categoryName} = req.body
     await db.insertCategoryName(categoryName)
-    res.status(200).json(categoryName)
+    res.redirect("/category")
+}
+
+async function createCategoryNameGet(req: Request, res: Response) {
+    res.render("categoryCreate")
 }
 
 async function updateCategoryName(req:Request, res: Response) {
@@ -34,7 +38,8 @@ async function getCategoryItems(req: Request, res: Response) {
 }
 
 export = {
-    createCategoryName,
+    createCategoryNamePost,
+    createCategoryNameGet,
     updateCategoryName,
     deleteCategory,
     getAllCategories,
