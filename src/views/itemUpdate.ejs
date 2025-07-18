@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Item</title>
+</head>
+<body>
+    <% if(item && item.length > 0) { %>
+    <h1>Update Item</h1>
+    <form action="/item/<%= item[0].item_id %>/update" method="POST">
+        <div>
+            <label for="itemName">Name:</label>
+            <input type="text" name="itemName" id="itemName" 
+                   value="<%= item[0].item_name %>" required>
+        </div>
+        <div>
+            <label for="item_count">Count:</label>
+            <input type="number" name="item_count" id="item_count" 
+                   value="<%= item[0].item_count %>" min="0" required>
+        </div>
+        <div>
+            <label for="item_price">Price:</label>
+            <input type="number" name="item_price" id="item_price" 
+                   value="<%= item[0].item_price %>" step="0.01" min="0" required>
+        </div>
+        <div>
+            <label for="category_id">Category ID:</label>
+            <input type="number" name="category_id" id="category_id" 
+                   value="<%= item[0].category_id %>" min="1" required>
+        </div>
+        <input type="hidden" name="itemId" value="<%= item[0].item_id %>">
+        <button type="submit">Update Item</button>
+    </form>
+    <% } else { %>
+    <p>Item not found!</p>
+    <% } %>
+    <a href="/category">Back to categories</a>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Item</title>
+</head>
+<body>
+    <% if(item[0]) { %>
+        <h2><%= item[0].item_name %></h2>
+        <p><%= item[0].item_count %></p>
+        <p><%= item[0].item_price %></p>
+        <a href=<%= `/item/${item[0].item_id}/update` %>>update</a>
+    <% } else { %>
+        <p>item not found</p>
+    <% } %>
+    <br>
+    <a href="/category/<%= item[0].category_id %>">Back to category items</a>
+</body>
+</html>
