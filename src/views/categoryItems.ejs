@@ -7,7 +7,7 @@
     <title>Category items</title>
 </head>
 <body>
-        <% if (items) { %>
+        <% if (items[0]) { %>
             <ul>
             <% items.forEach(item => { %>
                 <li><a href=<%= `/item/${item.item_id}` %>><%= item.item_name %></a></li>
@@ -16,6 +16,8 @@
         <% } else { %>
             <p>No items found</p>
         <% } %>
+        <a href="/item/new">Add new item</a>
+        <br>
         <a href="/category">Back to categories</a>
 </body>
 </html>
