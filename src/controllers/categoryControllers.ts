@@ -27,9 +27,16 @@ async function getAllCategories(req:Request, res: Response) {
     res.render("categories", {categories})
 }
 
+async function getCategoryItems(req: Request, res: Response) {
+    const category_id = parseInt(req.params.categoryId);
+    const items = await db.getCategoryItems(category_id)
+    res.render('categoryItems', {items})
+}
+
 export = {
     createCategoryName,
     updateCategoryName,
     deleteCategory,
     getAllCategories,
+    getCategoryItems
 }
