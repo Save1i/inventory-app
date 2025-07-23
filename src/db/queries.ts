@@ -46,6 +46,20 @@ async function getCategoryItems(category_id: number) {
     return items
 }
 
+async function postNewUser(username: string, hashedPassword: string) {
+    await sql.query("INSERT INTO users (username, password) VALUES ($1, $2)", [username, hashedPassword])
+}
+
+async function getUser(username: string) {
+    const user = await sql.query("SELECT * FROM users WHERE username = $1", [username])
+    return user
+}
+
+async function getUserById(id: number) {
+    const user = await sql.query("SELECT * FROM users WHERE id = $1", [id])
+    return user
+}
+
 export = {
     insertCategoryName,
     updateCategoryName,
@@ -57,6 +71,9 @@ export = {
     getAllItems,
     getItem,
     getCategoryItems,
+    postNewUser,
+    getUser,
+    getUserById
 }
 
     

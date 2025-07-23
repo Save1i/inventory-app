@@ -7,6 +7,29 @@
     <title>Categories</title>
 </head>
 <body>
+  <% if (locals.user) {%>
+    <h1>WELCOME BACK <%= user[0].username %></h1>
+    <a href="/user/log-out">LOG OUT</a>
+  <% } else { %>
+    <h1>please log in</h1>
+    <form action="/user/log-in" method="POST">
+      <label for="username">Username</label>
+      <input id="username" name="username" placeholder="username" type="text" />
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" />
+      <button type="submit">Log In</button>
+    </form>
+    <br>
+    <h1>OR</h1>
+    <br>
+      <h1>Sign Up</h1>
+  <form action="/user/sign-up" method="POST">
+    <label for="username">Username</label>
+    <input id="username" name="username" placeholder="username" type="text" />
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" />
+    <button type="submit">Sign Up</button>
+  <%}%>
         <% if (categories) { %>
             <ul>
             <% categories.forEach(category => { %>
@@ -15,7 +38,7 @@
             </ul>
         <% } else { %>
             <p>No categories found</p>
-        <% } %>
+  <% } %>
         <a href="category/new">Add new category</a>
 </body>
 </html>

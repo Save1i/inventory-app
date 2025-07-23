@@ -28,7 +28,8 @@ async function deleteCategory(req: Request, res:Response) {
 async function getAllCategories(req:Request, res: Response) {
     const categories = await db.getAllCategories()
     console.log(categories)
-    res.render("categories", {categories})
+    console.log({user: req.user})
+    res.render("categories", {categories, user: req.user})
 }
 
 async function getCategoryItems(req: Request, res: Response) {
