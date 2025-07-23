@@ -7,19 +7,30 @@ import passport from "passport"
 import LocalStrategy from "passport-local"
 import db from "./src/db/queries.ts"
 import bcrypt from 'bcryptjs'
+import pg from 'pg';
+import pgSession from "connect-pg-simple";
 
 const app = express()
 app.use(express.json());
 app.set('views', path.join(__dirname, 'src/views'))
 app.set('view engine', 'ejs')
 
-app.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
 
 const port = 3000
 
-require("dotenv").config({ debug: true });
+const { Pool } = pg;
+
+const pgPool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
+});
+
+const PgSession = pgSession(session);
+
+import { config } from 'dotenv';
+config();
 const sql = neon(process.env.DATABASE_URL as string);
 
 interface User {
@@ -27,6 +38,17 @@ interface User {
   username: string;
   password: string;
 }
+
+app.use(session({
+    store: new PgSession({
+    pool: pgPool,
+    tableName: 'session',
+  }),
+  secret: process.env.FOO_COOKIE_SECRET,
+  resave: false,
+  saveUninitialized: false, 
+  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
+}));
 
 app.get('/', async (req, res) => {
   try {
