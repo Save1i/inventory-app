@@ -87,6 +87,8 @@ passport.deserializeUser(async (id: number, done) => {
     }
 });
 
+app.use("/", router)
+
 app.get('/', async (req, res) => {
   try {
     res.send(`Hello world!`);
@@ -95,8 +97,6 @@ app.get('/', async (req, res) => {
     res.status(500).send('Error querying database');
   }
 });
-
-app.use("/", router)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
